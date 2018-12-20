@@ -1,0 +1,12 @@
+.idea
+
+target
+build
+bin
+libs
+
+*.class
+*.war
+*.iml
+*.jar
+*.ear
