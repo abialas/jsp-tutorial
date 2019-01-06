@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 /**
  * Created by adam.
  */
-@WebServlet(value = "/hello")
+@WebServlet(name = "HelloWorld", value = "/hello")
 public class HelloWorldServlet extends HttpServlet {
 
     @Override
