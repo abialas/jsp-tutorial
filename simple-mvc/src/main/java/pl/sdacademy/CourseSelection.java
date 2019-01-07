@@ -3,13 +3,14 @@ package pl.sdacademy;
 import pl.sdacademy.model.CourseProvider;
 import pl.sdacademy.model.CourseType;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.Collection;
 
 /**
  * Created by adam.
@@ -21,17 +22,12 @@ public class CourseSelection extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         CourseType courseType = CourseType.valueOf(request.getParameter("courseType"));
 
-        response.setContentType("text/html");
-        response.setCharacterEncoding("UTF-8");
-
-        PrintWriter writer = response.getWriter();
-        writer.println("Selected category: " + courseType + "<br>");
-        writer.println("Available courses in selected category:<br>");
-        writer.println("<select>");
         CourseProvider courseProvider = new CourseProvider();
-        courseProvider.getAvailableCourses(courseType).stream()
-                .forEach(c -> writer.println("<option>" + c + "</option>"));
-        writer.println("</select>");
+        Collection<String> availableCourses = courseProvider.getAvailableCourses(courseType);
+        request.setAttribute("courses", availableCourses);
+
+        RequestDispatcher view = request.getRequestDispatcher("courses.jsp");
+        view.forward(request, response);
     }
 
 }
