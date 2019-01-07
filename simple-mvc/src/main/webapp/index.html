@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SDA - Course selection</title>
+</head>
+<body>
+    <h1>Course category in SDA</h1>
+    <form method="post" action="SelectCourse.do">
+        <p>Select category:</p>
+        <select name="courseType" onchange="this.form.submit()">
+            <option value="" disabled selected>Select...</option>
+            <option value="PROGRAMMER">Programmer</option>
+            <option value="TESTER">Tester</option>
+        </select>
+    </form>
+</body>
+</html>
