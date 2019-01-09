@@ -18,11 +18,19 @@ public class DownloadServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("application/octet-stream");
-        response.setHeader("Content-Disposition", "attachment; filename=\"welcome.txt\"");
+        String fileToDownload = request.getParameter("fileToDownload");
 
         ServletContext servletContext = getServletContext();
-        InputStream inputStream = servletContext.getResourceAsStream("/welcome.txt");
+        InputStream inputStream = servletContext.getResourceAsStream("/" + fileToDownload);
+
+        if (inputStream == null) {
+            response.getWriter().println("File not available for download: " + fileToDownload);
+            return;
+        }
+
+        response.setContentType("application/octet-stream");
+        response.setHeader("Content-Disposition", "attachment; filename=\"" + fileToDownload + "\"");
+
         ServletOutputStream responseOutputStream = response.getOutputStream();
 
         byte[] buffer = new byte[8 * 1024];
