@@ -19,6 +19,7 @@ public class DownloadServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/octet-stream");
+        response.setHeader("Content-Disposition", "attachment; filename=\"welcome.txt\"");
 
         ServletContext servletContext = getServletContext();
         InputStream inputStream = servletContext.getResourceAsStream("/welcome.txt");
@@ -32,5 +33,5 @@ public class DownloadServlet extends HttpServlet {
         responseOutputStream.flush();
         responseOutputStream.close();
     }
-    
+
 }
