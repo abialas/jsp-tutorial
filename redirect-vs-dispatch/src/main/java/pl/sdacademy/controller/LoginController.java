@@ -26,6 +26,7 @@ public class LoginController extends HttpServlet {
             || StringUtils.isBlank(password)
             || (!"JavaKtw12".equals(user) || !"Sda".equals(password))) {
             request.getRequestDispatcher("/login.jsp").forward(request, response);
+            return;
         }
 
         request.setAttribute("userName", user);
