@@ -27,9 +27,19 @@ public class LoginController extends HttpServlet {
         String user = request.getParameter("user");
         String password = request.getParameter("password");
 
-        if (StringUtils.isBlank(user)
-            || StringUtils.isBlank(password)
-            || (!"JavaKtw12".equals(user) || !"Sda".equals(password))) {
+        Map<String, String> validationMessages = new HashMap<>();
+
+        if (StringUtils.isBlank(user)) {
+            validationMessages.put("user", "User cannot be empty");
+        }
+        if (StringUtils.isBlank(password)) {
+            validationMessages.put("password", "Password cannot be empty");
+        }
+        if (!"JavaKtw12".equals(user) || !"Sda".equals(password)) {
+            validationMessages.put("login", "Invalid login or password");
+        }
+        if (!validationMessages.isEmpty()) {
+            request.setAttribute("validationMessages", validationMessages);
             request.getRequestDispatcher("/login.jsp").forward(request, response);
             return;
         }
