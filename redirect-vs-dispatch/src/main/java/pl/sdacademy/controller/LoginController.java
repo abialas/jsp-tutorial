@@ -34,7 +34,7 @@ public class LoginController extends HttpServlet {
             return;
         }
 
-        request.setAttribute("userName", user);
+        request.getSession().setAttribute("userName", user);
         response.sendRedirect("/main.jsp");
     }
 }
