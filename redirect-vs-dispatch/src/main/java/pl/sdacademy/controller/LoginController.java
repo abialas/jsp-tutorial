@@ -35,6 +35,6 @@ public class LoginController extends HttpServlet {
         }
 
         request.setAttribute("userName", user);
-        request.getRequestDispatcher("/main.jsp").forward(request, response);
+        response.sendRedirect("/main.jsp");
     }
 }
