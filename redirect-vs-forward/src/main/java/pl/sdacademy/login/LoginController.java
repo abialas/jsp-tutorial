@@ -45,8 +45,7 @@ public class LoginController extends HttpServlet {
             request.getRequestDispatcher("/loginError").forward(request, response);
             return;
         }
-        PrintWriter writer = response.getWriter();
-        writer.println("You are logged in the system");
+        request.getRequestDispatcher("/main").forward(request, response);
     }
 
 }
