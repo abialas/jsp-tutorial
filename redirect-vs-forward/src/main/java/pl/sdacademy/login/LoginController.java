@@ -1,4 +1,4 @@
-package pl.sdacademy;
+package pl.sdacademy.login;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Collection;
 
 /**
  * Created by adam.
@@ -30,6 +31,22 @@ public class LoginController extends HttpServlet {
                 "    </form>\n" +
                 "</body>\n" +
                 "</html>");
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String userName = request.getParameter("user");
+        String password = request.getParameter("password");
+
+        Collection<String> validationErrors = new LoginValidator().getLoginValidationMessages(userName, password);
+
+        if (!validationErrors.isEmpty()) {
+            request.setAttribute("validationErrors", validationErrors);
+            request.getRequestDispatcher("/loginError").forward(request, response);
+            return;
+        }
+        PrintWriter writer = response.getWriter();
+        writer.println("You are logged in the system");
     }
 
 }
