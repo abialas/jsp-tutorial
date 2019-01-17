@@ -49,6 +49,10 @@ public class BasketController extends HttpServlet {
                 "   </table>\n" +
                 "   <br />\n" +
                 "   <a href=\"/articles\">Add another article</a>\n" +
+                "   <br />\n" +
+                (request.getSession().getAttribute("TOKEN") != null ?
+                "   <a href=\"/logout\">Logout</a>\n" :
+                "   <a href=\"/login\">Login</a>\n") +
                 "</body>\n" +
                 "</html>");
     }

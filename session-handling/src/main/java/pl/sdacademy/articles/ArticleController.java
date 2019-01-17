@@ -44,6 +44,8 @@ public class ArticleController extends HttpServlet {
                 "        <br />\n" +
                 "        <input type=\"submit\" value=\"Add\">\n" +
                 "    </form>\n" +
+                "    <br />\n" +
+                "    <a href=\"/basket\">Go to basket</a>" +
                 "</body>\n" +
                 "</html>");
     }
@@ -68,6 +70,7 @@ public class ArticleController extends HttpServlet {
                 "   <a href=\"/articles\">Add another article</a>" +
                 "   <br />\n" +
                 "   <a href=\"/basket\">Go to basket</a>" +
+                "   <br />\n" +
                 "</body>\n" +
                 "</html>");
     }
