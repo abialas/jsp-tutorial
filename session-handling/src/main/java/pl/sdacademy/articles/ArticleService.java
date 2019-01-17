@@ -20,4 +20,10 @@ public class ArticleService {
         return availableArticles;
     }
 
+    public Article findArticleById(Long articleId) {
+        return availableArticles.stream()
+                .filter(a -> a.getId().equals(articleId))
+                .findFirst()
+                .orElse(null);
+    }
 }

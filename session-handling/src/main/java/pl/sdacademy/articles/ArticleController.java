@@ -7,7 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -47,8 +50,15 @@ public class ArticleController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getParameter("articleId");
-        request.getParameter("quantity");
+        Long articleId = Long.parseLong(request.getParameter("articleId"));
+        BigDecimal quantity = new BigDecimal(request.getParameter("quantity"));
+
+        Map<Long, BigDecimal> articleQuantityMap = (Map<Long, BigDecimal>) request.getSession().getAttribute("selectedArticles");
+        if (articleQuantityMap == null) {
+            articleQuantityMap = new HashMap<>();
+            request.getSession().setAttribute("selectedArticles", articleQuantityMap);
+        }
+        articleQuantityMap.compute(articleId, (k, v) -> (v == null) ? quantity : v.add(quantity));
 
         PrintWriter writer = response.getWriter();
         writer.println("<html>\n" +
