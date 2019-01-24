@@ -45,7 +45,8 @@ public class LoginController extends HttpServlet {
             request.getRequestDispatcher("/loginError").forward(request, response);
             return;
         }
-        request.getRequestDispatcher("/main").forward(request, response);
+        request.getSession();
+        response.sendRedirect("/main");
     }
 
 }
