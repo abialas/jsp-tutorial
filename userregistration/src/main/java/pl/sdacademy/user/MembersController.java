@@ -1,4 +1,4 @@
-package pl.sdacademy.registration;
+package pl.sdacademy.user;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -11,17 +11,16 @@ import java.io.IOException;
 /**
  * Created by adam.
  */
-@WebServlet(name = "UserController", value = "/users")
-public class UserController extends HttpServlet {
+@WebServlet(name = "MembersController", value = "/members")
+public class MembersController extends HttpServlet {
 
     @Inject
-    private UserService userService;
+    private MemberService memberService;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("users", userService.getUsers());
-
-        request.getRequestDispatcher("WEB-INF/users.jsp").forward(request, response);
+        request.setAttribute("members", memberService.getMembers());
+        request.getRequestDispatcher("WEB-INF/members.jsp").forward(request, response);
     }
 }

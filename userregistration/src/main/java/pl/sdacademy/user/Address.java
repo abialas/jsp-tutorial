@@ -1,28 +1,29 @@
-package pl.sdacademy.registration;
+package pl.sdacademy.user;
+
+import javax.persistence.*;
 
 /**
  * Created by adam.
  */
-public class AddressDTO {
+@Entity
+public class Address {
     private Long id;
     private String city;
     private String street;
     private String houseNo;
 
-    public AddressDTO() {
-    }
-
-    public AddressDTO(Address address) {
-        this.id = address.getId();
-        this.city = address.getCity();
-        this.street = address.getStreet();
-        this.houseNo = address.getHouseNo();
-    }
-
+    @Id
+    @SequenceGenerator(name = "address_id_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "address_id_seq")
     public Long getId() {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Column
     public String getCity() {
         return city;
     }
@@ -31,6 +32,7 @@ public class AddressDTO {
         this.city = city;
     }
 
+    @Column
     public String getStreet() {
         return street;
     }
@@ -39,16 +41,12 @@ public class AddressDTO {
         this.street = street;
     }
 
+    @Column
     public String getHouseNo() {
         return houseNo;
     }
 
     public void setHouseNo(String houseNo) {
         this.houseNo = houseNo;
-    }
-
-    @Override
-    public String toString() {
-        return city + ", " + street + " " + houseNo;
     }
 }

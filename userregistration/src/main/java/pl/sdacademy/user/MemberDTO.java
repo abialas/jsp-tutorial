@@ -1,26 +1,30 @@
-package pl.sdacademy.registration;
+package pl.sdacademy.user;
 
 /**
  * Created by adam.
  */
-public class UserDTO {
+public class MemberDTO {
     private Long id;
     private String firstName;
     private String lastName;
     private AddressDTO addressDTO;
 
-    public UserDTO() {
+    public MemberDTO() {
     }
 
-    public UserDTO(User user) {
-        this.id = user.getId();
-        this.firstName = user.getFirstName();
-        this.lastName = user.getLastName();
-        this.addressDTO = new AddressDTO(user.getAddress());
+    public MemberDTO(MemberAccount memberAccount) {
+        this.id = memberAccount.getId();
+        this.firstName = memberAccount.getFirstName();
+        this.lastName = memberAccount.getLastName();
+        this.addressDTO = new AddressDTO(memberAccount.getAddress());
     }
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getFirstName() {

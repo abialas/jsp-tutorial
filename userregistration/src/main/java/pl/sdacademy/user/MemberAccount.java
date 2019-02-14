@@ -1,4 +1,4 @@
-package pl.sdacademy.registration;
+package pl.sdacademy.user;
 
 import javax.persistence.*;
 
@@ -6,14 +6,15 @@ import javax.persistence.*;
  * Created by adam.
  */
 @Entity
-public class User {
+public class MemberAccount {
     private Long id;
     private String firstName;
     private String lastName;
     private Address address;
 
     @Id
-    @GeneratedValue
+    @SequenceGenerator(name = "member_id_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "member_id_seq")
     public Long getId() {
         return id;
     }
