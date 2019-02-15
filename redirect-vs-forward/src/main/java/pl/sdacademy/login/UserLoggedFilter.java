@@ -20,7 +20,7 @@ public class UserLoggedFilter implements Filter {
         HttpSession session = httpServletRequest.getSession(false);
 
         if (session == null) {
-            ((HttpServletResponse) response).sendRedirect("/login");
+            ((HttpServletResponse) response).sendRedirect("login");
             return;
         }
         chain.doFilter(request, response);

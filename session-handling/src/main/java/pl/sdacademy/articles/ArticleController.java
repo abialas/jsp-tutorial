@@ -28,7 +28,7 @@ public class ArticleController extends HttpServlet {
                 .map(article -> "<option value='" + article.getId() + "'>" + article.getName() + "</option>")
                 .collect(Collectors.joining());
 
-        String selectWithArticles = "<label for=\"user\">User:</label>" +
+        String selectWithArticles = "<label for=\"user\">Article:</label>" +
                 "<select name=\"articleId\" id=\"articles\">" +
                 articlesOptions +
                 "</select>";
@@ -36,7 +36,7 @@ public class ArticleController extends HttpServlet {
         PrintWriter writer = response.getWriter();
         writer.println("<html>\n" +
                 "<body>\n" +
-                "    <form action=\"/articles\" method=\"post\">\n" +
+                "    <form action=\"articles\" method=\"post\">\n" +
                 selectWithArticles +
                 "        <br />\n" +
                 "        <label for=\"quantity\">Quantity:</label>\n" +
@@ -60,6 +60,7 @@ public class ArticleController extends HttpServlet {
             articleQuantityMap = new HashMap<>();
             request.getSession().setAttribute("selectedArticles", articleQuantityMap);
         }
+
         articleQuantityMap.compute(articleId, (k, v) -> (v == null) ? quantity : v.add(quantity));
 
         PrintWriter writer = response.getWriter();
