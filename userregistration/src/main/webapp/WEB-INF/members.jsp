@@ -13,22 +13,29 @@
 </head>
 <body>
     <%@ include file="header.html" %>
-    <table>
-        <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Address</th>
-            <th>Action</th>
-        </tr>
-        <c:forEach var="memberAccount" items="${members}">
-            <tr>
-                <td>${memberAccount.firstName}</td>
-                <td>${memberAccount.lastName}</td>
-                <td>${memberAccount.addressDTO}</td>
-                <td><a href="memberView?memberId=${memberAccount.id}">Show member account</a></td>
-            </tr>
-        </c:forEach>
-    </table>
+    <c:choose>
+        <c:when test="${not empty members}">
+            <table>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Address</th>
+                    <th>Action</th>
+                </tr>
+                <c:forEach var="memberAccount" items="${members}">
+                    <tr>
+                        <td>${memberAccount.firstName}</td>
+                        <td>${memberAccount.lastName}</td>
+                        <td>${memberAccount.addressDTO}</td>
+                        <td><a href="memberView?memberId=${memberAccount.id}">Show member account</a></td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </c:when>
+        <c:otherwise>
+            <p>No members to display</p>
+        </c:otherwise>
+    </c:choose>
     <a href="memberCreate">Add new member account</a>
 </body>
 </html>

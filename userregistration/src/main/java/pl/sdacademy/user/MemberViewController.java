@@ -1,5 +1,7 @@
 package pl.sdacademy.user;
 
+import org.apache.commons.lang3.StringUtils;
+
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,8 +22,10 @@ public class MemberViewController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        long memberId = Long.parseLong(request.getParameter("memberId"));
-        request.setAttribute("memberAccount", memberService.getMember(memberId));
+        String memberIdParameter = request.getParameter("memberId");
+        if (StringUtils.isNotBlank(memberIdParameter)) {
+            request.setAttribute("memberAccount", memberService.getMember(Long.parseLong(memberIdParameter)));
+        }
         request.getRequestDispatcher("WEB-INF/memberView.jsp").forward(request, response);
     }
 
